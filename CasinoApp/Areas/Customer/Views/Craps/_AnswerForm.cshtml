@@ -4,12 +4,30 @@
 
 <form asp-controller="Craps" asp-action="CheckAnswer" method="post">
     <label asp-for="UserAnswer">Enter your answer</label>
-    <input type="number" asp-for="UserAnswer" name="UserAnser" required/>
-    <button type="submit">Submit</button>
+    <input type="number" asp-for="UserAnswer" name="UserAnswer" required/>
+    <button onclick="submitAnswer()" type="submit">Submit</button>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('UserAnswer').focus();
-        })
+        });
+
+        function submitAnswer() {
+            // Get form data
+            var formData = new FormData(document.getElementById('answerForm'));
+
+            // Send form data using AJAX
+            fetch('@Url.Action("CheckAnswer", "Craps")', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.text())
+                .then(html => {
+                    // Replace the content of the current page with the returned HTML
+                    document.open();
+                    document.write(html);
+                    document.close();
+                });
+        }
     </script>
 </form>

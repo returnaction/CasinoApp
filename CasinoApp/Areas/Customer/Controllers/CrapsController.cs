@@ -20,8 +20,10 @@ namespace CasinoApp.Areas.Customer.Controllers
 
             if (hornBet.IsCorrect)
             {
-                hornBet = GenerateNewGame();
+                return View("Index", hornBet);
             }
+
+            hornBet = GenerateNewGame();
 
             return View("Index", hornBet);
         }
