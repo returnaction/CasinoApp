@@ -1,0 +1,15 @@
+﻿@using CasinoApp.Models
+@model HornBet
+
+<h2> Craps Horb bet payout</h2>
+<p>Dice Number: @Model.DiceNumber</p>
+<p>Random bet: @Model.RandomBet</p>
+
+@if (Model.IsCorrect)
+{
+    <p class="text-success">Correct! You can try a new question.</p>
+}
+else
+{
+    <partial name="_AnswerForm" />
+}
