@@ -1,5 +1,7 @@
 using CasinoApp.Data;
+using CasinoApp.Helper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Drawing.Text;
 
@@ -11,9 +13,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddRazorPages();
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 var app = builder.Build();
 
@@ -44,4 +52,7 @@ app.MapRazorPages();
 
 app.Run();
 
+// admin@gmail.com      adFminlsdkfj293!
 
+// nikita@gmail.com     dsdLKDFS82dlksf!
+// kastet@gmail.com     KDSHF293Kkd!
