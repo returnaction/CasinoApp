@@ -1,5 +1,7 @@
 using CasinoApp.Data;
 using CasinoApp.Helper;
+using CasinoApp.Repository;
+using CasinoApp.Repository.IRepository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +23,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.Sign
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 var app = builder.Build();
